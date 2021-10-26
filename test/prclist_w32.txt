@@ -1,0 +1,32 @@
+Name	Type	Pid	Count	Memory
+System Idle Process	Services	0	1	8
+System	Services	4	1	144
+Registry	Services	100	1	73664
+smss.exe	Services	380	1	1240
+csrss.exe	Services		2	11472
+wininit.exe	Services	840	1	7096
+winlogon.exe	Console	940	1	11708
+services.exe	Services	980	1	7580
+lsass.exe	Services	1004	1	14384
+svchost.exe	Services		14	228000
+fontdrvhost.exe	Console		2	12260
+dwm.exe	Console	1080	1	68388
+sihost.exe	Console	2468	1	27148
+taskhostw.exe	Console	2540	1	28152
+explorer.exe	Console	2792	1	146612
+dasHost.exe	Services	1856	1	13152
+StartMenu.exe	Console	2772	1	12624
+RuntimeBroker.exe	Console		2	42724
+firefox.exe	Console		7	1239996
+StartMenuExperienceHost.exe	Console	4796	1	68500
+ShellExperienceHost.exe	Console	4792	1	51336
+ApplicationFrameHost.exe	Console	2648	1	25128
+audiodg.exe	Services	4888	1	20236
+SecurityHealthService.exe	Services	4812	1	13036
+TextInputHost.exe	Console	3948	1	47964
+NewEdit.exe	Console	2932	1	13956
+cmd.exe	Console		2	8456
+conhost.exe	Console	2912	1	15784
+py.exe	Console	4160	1	6592
+python.exe	Console	3972	1	8160
+WmiPrvSE.exe	Services	3324	1	9276

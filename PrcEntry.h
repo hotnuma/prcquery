@@ -10,20 +10,16 @@ public:
     PrcEntry();
 
     bool readLineTxt(const CString &buffer);
-    //bool readBufferCsv(const CString &buffer);
 
-    static bool writeHeaderCsv(CFile &outfile);
+    bool writeLineTxt(CFile &outfile);
+
+    static bool writeHeaderTxt(CFile &outfile);
     bool writeLineCsv(CFile &outfile);
 
+    CString name;
     CString user;
-    int pid;
+    CString pid;
     CString command;
-
-//    CString name;
-//    int     count = 1;
-//    CString pid;
-//    CString type;
-//    int     memory;
 
 };
 

@@ -1,8 +1,11 @@
-#include <stdlib.h>
-#include "print.h"
-#include "CFile.h"
-#include "PrcEntry.h"
 #include "PrcList.h"
+#include "PrcEntry.h"
+
+#include <CFile.h>
+#include <CProcess.h>
+#include <stdlib.h>
+
+#include <print.h>
 
 DELETEFUNC(PrcEntry)
 
@@ -13,29 +16,40 @@ PrcList::PrcList()
 
 bool PrcList::queryAll()
 {
-    FILE *inpipe;
+    CString cmd = "ps aux";
 
-    if ((inpipe = popen("ps aux", "r")) == nullptr)
+    CProcess process;
+    if (!process.start(cmd, CP_PIPEOUT))
     {
-        perror("popen");
-        return false;
+        print("start failed");
+
+        return -1;
     }
 
-    CString line(1024);
+    int status = process.exitStatus();
+
+    if (status != 0)
+    {
+        print("program returned : %d", status);
+
+        return -1;
+    }
+
+    char *ptr = process.outBuff.data();
+    CString line;
     int count = 0;
 
-    while (fgets(line.data(), line.capacity(), inpipe))
+    while (strGetLine(&ptr, line))
     {
         if (count > 0)
         {
-            line.terminate();
             _addEntry(line);
+
+            //print(line);
         }
 
         ++count;
     }
-
-    pclose(inpipe);
 
     return true;
 }
@@ -50,85 +64,31 @@ bool PrcList::_addEntry(const CString &line)
         return false;
     }
 
-//    if (entry->name == "prcquery.exe"
-//        || entry->name == "tasklist.exe"
-//        || entry->name == "VBoxTray.exe"
-//        || entry->name == "VBoxService.exe")
-//    {
-//        delete entry;
-//        return true;
-//    }
-
-//    PrcEntry *found = (PrcEntry*) _find(entry->name);
-
-//    if (found)
-//    {
-//        found->pid = "";
-//        found->count += 1;
-//        found->memory += entry->memory;
-
-//        delete entry;
-//        return true;
-//    }
+    print(entry->name);
 
     _entryList.append(entry);
 
     return true;
 }
 
-//PrcEntry* PrcList::_find(const CString &name)
-//{
-//    if (name == "")
-//        return nullptr;
-
-//    int size = _entryList.size();
-//    for (int i = 0; i < size; ++i)
-//    {
-//        PrcEntry *entry = (PrcEntry*) _entryList[i];
-
-//        if (entry->name == name)
-//            return entry;
-//    }
-
-//    return nullptr;
-//}
-
-bool PrcList::write(const CString &filepath)
+bool PrcList::writeTxt(const CString &filepath)
 {
     CFile outfile;
 
     if (!outfile.open(filepath, "wb"))
         return false;
 
-    PrcEntry::writeHeaderCsv(outfile);
+    PrcEntry::writeHeaderTxt(outfile);
 
     int size = _entryList.size();
 
     for (int i = 0; i < size; ++i)
     {
         PrcEntry *entry = (PrcEntry*) _entryList[i];
-        entry->writeLineCsv(outfile);
+        entry->writeLineTxt(outfile);
     }
 
     return true;
 }
-
-//bool PrcList::_writeBuffer(const CString &filepath, const CString &buffer)
-//{
-//    if (filepath.endsWith(".xls", false))
-//    {
-//        CString buff = strconv(buffer, CP_UTF8, 1252);
-//        if (buff.isEmpty())
-//            return false;
-
-//        fileWrite(filepath, buff);
-//    }
-//    else
-//    {
-//        fileWrite(filepath, buffer);
-//    }
-
-//    return true;
-//}
 
 

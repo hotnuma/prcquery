@@ -1,5 +1,4 @@
 #include "PrcQuery.h"
-#include "Global.h"
 
 #include <libapp.h>
 #include <libfile.h>
@@ -49,7 +48,7 @@ bool PrcQuery::execute(int argc, char **argv)
         return false;
     }
 
-    _prclist.write(outpath);
+    _prclist.writeTxt(outpath);
 
     return true;
 }

@@ -5,20 +5,20 @@ DEFINES =
 INCLUDEPATH =
 
 HEADERS += \
-    Global.h \
-    PrcQuery.h \
     PrcEntry.h \
     PrcList.h \
+    PrcQuery.h \
 
 SOURCES += \
     0Temp.cpp \
-    PrcQuery.cpp \
     main.cpp \
     PrcEntry.cpp \
     PrcList.cpp \
+    PrcQuery.cpp \
 
 DISTFILES += \
     install.sh \
     meson.build \
+    Readme.txt \
 
 
