@@ -123,19 +123,19 @@ bool PrcEntry::writeHeaderTxt(CFile &outfile)
 
 bool PrcEntry::writeLineTxt(CFile &outfile)
 {
-    strEllipsize(name, COL_NAME);
+    strEllipsize(name, COL_NAME, "+");
     strPadRight(name, COL_NAME, ' ');
     outfile << name;
 
     outfile << SEP_SPACE;
 
-    strEllipsize(user, COL_USER);
+    strEllipsize(user, COL_USER, "+");
     strPadRight(user, COL_USER, ' ');
     outfile << user;
 
     outfile << SEP_SPACE;
 
-    strEllipsize(pid, COL_PID);
+    strEllipsize(pid, COL_PID, "+");
     strPadLeft(pid, COL_PID, ' ');
     outfile << pid;
 
