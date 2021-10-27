@@ -1,7 +1,6 @@
 #include "PrcQuery.h"
 
 #include <libapp.h>
-#include <libfile.h>
 #include <libpath.h>
 
 #include <print.h>
@@ -19,7 +18,7 @@ PrcQuery::PrcQuery()
 bool PrcQuery::execute(int argc, char **argv)
 {
     CString homeDir = getHomeDirectory();
-    CString outpath = pathJoin(getHomeDirectory(), "ps_aux.txt");
+    CString outpath = pathJoin(getHomeDirectory(), "sys_prcquery.txt");
 
     int n = 1;
     while (n < argc)

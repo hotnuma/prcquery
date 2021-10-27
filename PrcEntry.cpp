@@ -11,40 +11,6 @@
 #define COL_USER    8
 #define COL_PID     7
 
-bool strEllipsize(CString &str, int length)
-{
-    if (length < 4)
-        return false;
-
-    int size = str.size();
-
-    if (size <= length)
-        return false;
-
-    length -= 3;
-    str.terminate(length);
-    str.append("...");
-
-    return true;
-}
-
-bool strPadRight(CString &str, int length, char c)
-{
-    int delta = length - str.size();
-
-    if (length < 1 || delta < 1)
-        return false;
-
-    str.resize(length + 1);
-
-    for (int i = 0; i < delta; ++i)
-    {
-        str.append(c);
-    }
-
-    return true;
-}
-
 const char* strCommand(const char *path)
 {
     if (!path || !*path)
@@ -170,7 +136,7 @@ bool PrcEntry::writeLineTxt(CFile &outfile)
     outfile << SEP_SPACE;
 
     strEllipsize(pid, COL_PID);
-    strPadRight(pid, COL_PID, ' ');
+    strPadLeft(pid, COL_PID, ' ');
     outfile << pid;
 
     outfile << SEP_SPACE;
